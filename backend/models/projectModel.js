@@ -21,6 +21,11 @@ const projectSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 
 module.exports = mongoose.model("Project", projectSchema);

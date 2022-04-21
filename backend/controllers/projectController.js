@@ -5,9 +5,18 @@ const Project = require("../models/projectModel");
 // @desc Get all projects.
 // @access Private
 const getProjects = asyncHandler(async (req, res) => {
-  const projects = await Project.find();
+  const projects = await Project.find({ user: req.user.id });
 
   res.status(200).json(projects);
+});
+
+// @route GET api/projects/:id
+// @desc Get a project.
+// @access Private
+const getProject = asyncHandler(async (req, res) => {
+  const project = await Project.findById(req.params.id);
+
+  res.status(200).json(project);
 });
 
 // @route POST api/projects/
@@ -23,6 +32,7 @@ const createProject = asyncHandler(async (req, res) => {
   const project = await Project.create({
     name,
     steps,
+    user: req.user.id,
   });
   res.status(200).json(project);
 });
@@ -36,6 +46,10 @@ const deleteProject = asyncHandler(async (req, res) => {
   if (!project) {
     res.status(400);
     throw new Error("Project not found.");
+  }
+  if (project.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized.");
   }
   await project.remove();
 
@@ -55,6 +69,11 @@ const updateProject = asyncHandler(async (req, res) => {
     throw new Error("Project not found.");
   }
 
+  if (project.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized.");
+  }
+
   const updatedProject = await Project.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -64,4 +83,10 @@ const updateProject = asyncHandler(async (req, res) => {
   res.status(200).json(updatedProject);
 });
 
-module.exports = { getProjects, createProject, deleteProject, updateProject };
+module.exports = {
+  getProjects,
+  getProject,
+  createProject,
+  deleteProject,
+  updateProject,
+};
