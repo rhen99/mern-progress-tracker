@@ -22,7 +22,9 @@ function Register() {
               <input type="password" />
             </div>
             <div className="form-group">
-              <button type="submit">Register</button>
+              <button type="submit" className="btn primary">
+                Register
+              </button>
             </div>
           </form>
         </div>

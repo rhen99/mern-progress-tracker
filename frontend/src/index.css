@@ -6,10 +6,166 @@
 }
 body {
   font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  color: #333;
 }
 ul {
   list-style: none;
 }
 a {
   text-decoration: none;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn:focus {
+}
+.btn.primary {
+  background-color: rgb(255, 209, 5);
+}
+.btn.primary:active,
+.btn.primary:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 209, 5, 0.616);
+}
+.btn.delete {
+  background-color: rgb(247, 23, 23);
+  color: #fff;
+}
+.btn.delete:active,
+.btn.delete:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgb(247, 23, 23);
+}
+.btn.check {
+  background-color: rgb(15, 133, 0);
+  color: #fff;
+}
+.btn.check:active,
+.btn.check:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgb(15, 133, 0);
+}
+.btn.sm {
+  padding: 0.3rem 1rem;
+}
+
+.navbar {
+  position: relative;
+  z-index: 10;
+  background-color: #29b5ec;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+.navbar a {
+  color: #333;
+}
+.navbar .container {
+  display: flex;
+}
+.navbar-brand {
+  flex: 1;
+}
+.navbar-brand a {
+  font-size: 20px;
+  display: block;
+  padding: 1rem 0;
+  font-weight: 700;
+}
+.navigation ul {
+  display: flex;
+}
+.navigation a {
+  display: block;
+  padding: 1rem;
+}
+.page-action {
+  padding: 1rem 0;
+}
+.form-box {
+  background-color: #fff;
+  margin-top: 10rem;
+  padding: 1rem 2rem;
+}
+.form-heading {
+  padding: 1rem 0;
+}
+.form-group {
+  padding: 0.5rem 0;
+}
+.form-group input {
+  width: 100%;
+  border: 1px solid #333;
+  font-size: 18px;
+  padding: 0.3rem;
+}
+.form-group input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(41, 181, 236, 0.808);
+}
+.headings {
+  padding: 1rem 0;
+}
+.project-list li {
+  margin-bottom: 1rem;
+}
+.project {
+  background-color: #fff;
+  padding: 1rem;
+}
+.project h4 {
+  font-size: 20px;
+}
+.project a {
+  color: #333;
+  text-decoration: underline;
+}
+.project a:hover {
+  color: #29b5ec;
+}
+.project-content {
+  font-size: 13px;
+  padding: 0.5rem 0;
+}
+.progress {
+}
+
+.progress-bar-outer {
+  height: 20px;
+  width: 100%;
+  background-color: #ddd;
+  position: relative;
+}
+.progress-bar-inner {
+  width: 0;
+  height: 100%;
+  background-color: #29b5ec;
+}
+.progress-text {
+  position: absolute;
+  left: 45%;
+}
+.step {
+  display: flex;
+  margin: 1rem 0;
+}
+.step-content {
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .form-box {
+    margin-inline: auto;
+    width: 600px;
+  }
 }

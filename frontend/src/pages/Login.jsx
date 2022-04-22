@@ -18,7 +18,9 @@ function Login() {
               <input type="password" />
             </div>
             <div className="form-group">
-              <button type="submit">Login</button>
+              <button type="submit" className="btn primary">
+                Login
+              </button>
             </div>
           </form>
         </div>
