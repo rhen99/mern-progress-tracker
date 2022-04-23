@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/authStore";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login, reset } = useContext(AuthContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    login({ username, password });
+    reset();
   };
 
   return (

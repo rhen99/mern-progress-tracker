@@ -57,6 +57,9 @@ a {
 .btn.sm {
   padding: 0.3rem 1rem;
 }
+.error {
+  color: red;
+}
 
 .navbar {
   position: relative;

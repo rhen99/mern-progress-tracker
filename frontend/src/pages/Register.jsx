@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/authStore";
 
 function Register() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  //const [error, setError] = useState("");
 
+  const { register } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
+    register({ name, username, password });
   };
   return (
     <>
@@ -17,6 +21,11 @@ function Register() {
             <h2>Register</h2>
           </div>
           <form onSubmit={handleSubmit}>
+            {/* {error && (
+              <div className="error">
+                <p>{error}</p>
+              </div>
+            )} */}
             <div className="form-group">
               <label>Name</label>
               <input
