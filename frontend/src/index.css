@@ -28,9 +28,6 @@ a {
   color: #333;
   text-decoration: none;
 }
-.btn:active,
-.btn:focus {
-}
 .btn.primary {
   background-color: rgb(255, 209, 5);
 }
@@ -100,6 +97,17 @@ a {
 .form-heading {
   padding: 1rem 0;
 }
+.form-inline {
+  display: flex;
+}
+.form-inline > div:nth-child(1) {
+  flex: 1;
+}
+.form-inline > div:nth-child(2) {
+  align-self: end;
+  padding-left: 5px;
+}
+
 .form-group {
   padding: 0.5rem 0;
 }
@@ -137,8 +145,6 @@ a {
   font-size: 13px;
   padding: 0.5rem 0;
 }
-.progress {
-}
 
 .progress-bar-outer {
   height: 20px;
@@ -161,6 +167,23 @@ a {
 }
 .step-content {
   flex: 1;
+}
+.added-steps li {
+  margin-bottom: 1rem;
+}
+.added-step {
+  background-color: #f3f3f3;
+  position: relative;
+  padding: 0.5rem;
+}
+.added-step button {
+  position: absolute;
+  right: 1%;
+  bottom: 10%;
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  color: red;
 }
 
 @media (min-width: 768px) {

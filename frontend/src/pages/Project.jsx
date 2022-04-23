@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import ProgressBar from "../componemts/ProgressBar";
+import Step from "../componemts/Step";
 
 function Project() {
   return (
@@ -12,35 +14,12 @@ function Project() {
           </div>
           <h1>Your Project</h1>
         </div>
-        <div className="progress">
-          <div className="progress-bar-outer">
-            <div className="progress-bar-inner">
-              <span className="progress-text">0%</span>
-            </div>
-          </div>
-        </div>
+        <ProgressBar />
         <div className="steps">
           <ul className="step-list">
-            <li>
-              <div className="step">
-                <div className="step-content">
-                  <p>Lorem ipsum dolor sit.</p>
-                </div>
-                <div className="step-actions">
-                  <button className="btn sm check">Check Step</button>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="step">
-                <div className="step-content">
-                  <p>Lorem ipsum dolor sit.</p>
-                </div>
-                <div className="step-actions">
-                  <button className="btn sm check">Check Step</button>
-                </div>
-              </div>
-            </li>
+            <Step />
+            <Step />
+            <Step />
           </ul>
         </div>
       </div>
