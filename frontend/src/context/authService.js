@@ -6,7 +6,7 @@ export const registerUser = async (userData) => {
     const response = await axios.post(API_URL, userData);
 
     if (response.data) {
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data));
       return response.data;
     }
   } catch (error) {
@@ -20,7 +20,7 @@ export const loginUser = async (userData) => {
     const response = await axios.post(API_URL + "/login", userData);
 
     if (response.data) {
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data));
       return response.data;
     }
   } catch (error) {
@@ -29,10 +29,8 @@ export const loginUser = async (userData) => {
     return message;
   }
 };
-export const getUser = async () => {
+export const checkUser = async (token) => {
   try {
-    const token = localStorage.getItem("token");
-
     const response = await axios.get(API_URL + "/user", {
       headers: {
         Authorization: "Bearer " + token,
@@ -40,12 +38,9 @@ export const getUser = async () => {
     });
 
     if (response.data) {
-      localStorage.setItem("token", response.data.token);
       return response.data;
     }
   } catch (error) {
-    const message = error.response;
-
-    return message;
+    return false;
   }
 };

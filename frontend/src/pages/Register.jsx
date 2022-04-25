@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authStore";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
@@ -8,7 +9,17 @@ function Register() {
   const [password2, setPassword2] = useState("");
   //const [error, setError] = useState("");
 
-  const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { register, isSuccess, user, reset } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isSuccess || user) {
+      navigate("/");
+    }
+    reset();
+  }, [isSuccess, user, navigate, reset]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     register({ name, username, password });

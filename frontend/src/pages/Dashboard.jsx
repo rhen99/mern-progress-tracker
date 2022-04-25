@@ -5,15 +5,14 @@ import ProjectItem from "../componemts/ProjectItem";
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { reset, getData, user } = useContext(AuthContext);
+
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    getData();
     if (!user) {
       navigate("/login");
     }
-    reset();
-  }, [reset, getData, user, navigate]);
+  }, [navigate, user]);
   return (
     <>
       <div className="container">

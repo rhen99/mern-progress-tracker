@@ -16,6 +16,13 @@ const UserReducer = (state, action) => {
         isSuccess: true,
         isError: false,
       };
+    case "LOGOUT_USER":
+      return {
+        message: "",
+        user: null,
+        isSuccess: true,
+        isError: false,
+      };
     case "GET_USER":
       return {
         message: "",
@@ -32,6 +39,7 @@ const UserReducer = (state, action) => {
       };
     case "RESET":
       return {
+        ...state,
         isError: false,
         isSuccess: false,
         message: "",

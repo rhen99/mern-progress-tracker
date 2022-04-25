@@ -1,9 +1,11 @@
 import { createContext, useReducer } from "react";
 import UserReducer from "./userReducer";
-import { registerUser, loginUser, getUser } from "./authService";
+import { registerUser, loginUser } from "./authService";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
-  user: {},
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   message: "",
@@ -43,25 +45,16 @@ export const AuthProvider = ({ children }) => {
       });
     }
   };
-  const getData = async () => {
-    const response = await getUser();
-
-    if (response.status === 400) {
-      dispatch({
-        type: "AUTH_FAILED",
-        payload: response.data.message,
-      });
-    } else {
-      dispatch({
-        type: "GET_USER",
-        payload: response,
-      });
-    }
-  };
   const reset = () => {
     dispatch({
       type: "RESET",
     });
+  };
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+    localStorage.removeItem("user");
   };
   return (
     <AuthContext.Provider
@@ -73,7 +66,7 @@ export const AuthProvider = ({ children }) => {
         register,
         login,
         reset,
-        getData,
+        logout,
       }}
     >
       {children}

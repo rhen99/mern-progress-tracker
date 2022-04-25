@@ -1,16 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authStore";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const { login, reset } = useContext(AuthContext);
+  const { login, isSuccess, user, reset } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isSuccess || user) {
+      navigate("/");
+    }
+    reset();
+  }, [isSuccess, user, navigate, reset]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ username, password });
-    reset();
   };
 
   return (
