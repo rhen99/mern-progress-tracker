@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authStore";
+import { ProjectProvider } from "./context/projectStore";
 import Header from "./componemts/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -11,14 +12,16 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/:id" element={<Project />} />
-          <Route path="/create" element={<AddProject />} />
-        </Routes>
+        <ProjectProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/:id" element={<Project />} />
+            <Route path="/create" element={<AddProject />} />
+          </Routes>
+        </ProjectProvider>
       </AuthProvider>
     </Router>
   );

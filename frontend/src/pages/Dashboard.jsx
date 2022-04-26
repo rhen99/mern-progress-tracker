@@ -1,16 +1,19 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authStore";
+import { ProjectContext } from "../context/projectStore";
 import ProjectItem from "../componemts/ProjectItem";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const { isError, getUserData, logout } = useContext(AuthContext);
+  const { getProjects } = useContext(ProjectContext);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getUserData(JSON.parse(localStorage.getItem("token")));
+      getProjects();
       if (isError) {
         logout();
       }
