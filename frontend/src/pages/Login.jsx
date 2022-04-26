@@ -7,14 +7,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const { login, isSuccess, user, reset } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
-    reset();
-  }, [isSuccess, user, navigate, reset]);
+  }, [localStorage.getItem("token")]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

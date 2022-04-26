@@ -1,11 +1,9 @@
 import { createContext, useReducer } from "react";
 import UserReducer from "./userReducer";
-import { registerUser, loginUser } from "./authService";
-
-const user = JSON.parse(localStorage.getItem("user"));
+import { registerUser, loginUser, getUser } from "./authService";
 
 const initialState = {
-  user: user ? user : null,
+  user: null,
   isError: false,
   isSuccess: false,
   message: "",
@@ -45,6 +43,22 @@ export const AuthProvider = ({ children }) => {
       });
     }
   };
+  const getUserData = async (token) => {
+    const response = await getUser(token);
+
+    if (response.status === 401) {
+      dispatch({
+        type: "AUTH_FAILED",
+        payload: response.data.message,
+      });
+    } else {
+      dispatch({
+        type: "GET_USER",
+        payload: response,
+      });
+    }
+    reset();
+  };
   const reset = () => {
     dispatch({
       type: "RESET",
@@ -54,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({
       type: "LOGOUT_USER",
     });
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
   return (
     <AuthContext.Provider
@@ -67,6 +81,7 @@ export const AuthProvider = ({ children }) => {
         login,
         reset,
         logout,
+        getUserData,
       }}
     >
       {children}

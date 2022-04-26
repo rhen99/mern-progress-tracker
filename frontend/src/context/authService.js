@@ -6,7 +6,7 @@ export const registerUser = async (userData) => {
     const response = await axios.post(API_URL, userData);
 
     if (response.data) {
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("token", JSON.stringify(response.data).token);
       return response.data;
     }
   } catch (error) {
@@ -20,7 +20,7 @@ export const loginUser = async (userData) => {
     const response = await axios.post(API_URL + "/login", userData);
 
     if (response.data) {
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("token", JSON.stringify(response.data.token));
       return response.data;
     }
   } catch (error) {
@@ -29,7 +29,7 @@ export const loginUser = async (userData) => {
     return message;
   }
 };
-export const checkUser = async (token) => {
+export const getUser = async (token) => {
   try {
     const response = await axios.get(API_URL + "/user", {
       headers: {
@@ -41,6 +41,8 @@ export const checkUser = async (token) => {
       return response.data;
     }
   } catch (error) {
-    return false;
+    const message = error.response;
+
+    return message;
   }
 };

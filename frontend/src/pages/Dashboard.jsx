@@ -6,13 +6,18 @@ import ProjectItem from "../componemts/ProjectItem";
 function Dashboard() {
   const navigate = useNavigate();
 
-  const { user } = useContext(AuthContext);
+  const { isError, getUserData, logout } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!user) {
+    if (localStorage.getItem("token")) {
+      getUserData(JSON.parse(localStorage.getItem("token")));
+      if (isError) {
+        logout();
+      }
+    } else {
       navigate("/login");
     }
-  }, [navigate, user]);
+  }, [localStorage.getItem("token")]);
   return (
     <>
       <div className="container">

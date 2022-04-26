@@ -11,14 +11,13 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const { register, isSuccess, user, reset } = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
-    reset();
-  }, [isSuccess, user, navigate, reset]);
+  }, [localStorage.getItem("token")]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
