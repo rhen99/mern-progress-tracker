@@ -7,11 +7,11 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  //const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const { register } = useContext(AuthContext);
+  const { register, message } = useContext(AuthContext);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -21,7 +21,21 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+    if (!name || !username || !password || !password2) {
+      setError("Please add all fields");
+      return;
+    }
+    if (password !== password2) {
+      setError("Your password doesn't match.");
+      return;
+    }
+
     register({ name, username, password });
+    if (message) {
+      setError(message || "Something went wrong.");
+      return;
+    }
   };
   return (
     <>
@@ -31,11 +45,11 @@ function Register() {
             <h2>Register</h2>
           </div>
           <form onSubmit={handleSubmit}>
-            {/* {error && (
+            {error && (
               <div className="error">
                 <p>{error}</p>
               </div>
-            )} */}
+            )}
             <div className="form-group">
               <label>Name</label>
               <input

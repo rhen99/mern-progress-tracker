@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { login } = useContext(AuthContext);
+  const { login, message } = useContext(AuthContext);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -17,7 +18,17 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+    if (!username || !password) {
+      setError(message || "Please add all fields");
+      return;
+    }
+
     login({ username, password });
+    if (message) {
+      setError(message || "Something went wrong.");
+      return;
+    }
   };
 
   return (
@@ -28,6 +39,11 @@ function Login() {
             <h2>Login</h2>
           </div>
           <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="error">
+                <p>{error}</p>
+              </div>
+            )}
             <div className="form-group">
               <label>Username</label>
               <input

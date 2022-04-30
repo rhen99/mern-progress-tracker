@@ -6,7 +6,7 @@ export const registerUser = async (userData) => {
     const response = await axios.post(API_URL, userData);
 
     if (response.data) {
-      localStorage.setItem("token", JSON.stringify(response.data).token);
+      localStorage.setItem("token", JSON.stringify(response.data.token));
       return response.data;
     }
   } catch (error) {
